@@ -1,0 +1,15 @@
+{
+  "name": "coupa_lookup",
+  "version": "1.0.0",
+  "description": "An API that returns PO line items for a given PO #",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "QREW Technologies",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "express": "^4.18.2"
+  }
+}
