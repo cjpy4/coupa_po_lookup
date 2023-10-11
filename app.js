@@ -26,8 +26,8 @@ let testObj = {
   ]
 }
 
-app.listen(3000, () => {
- console.log("Server running on port 3000");
+app.listen(8080, () => {
+ console.log("Server running on port 8080");
 });
 
 app.get("/requisition_items", async (req, res, next) => {
