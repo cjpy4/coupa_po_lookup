@@ -20,7 +20,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  Inspections:
+                  requisition_items:
                     type: array
                     items:
                       $ref: "#/components/schemas/ListOfItems"
@@ -118,7 +118,11 @@ components:
           type: string
           example: hu32hu3
         created-at:
-          description: The date-time of the object
+          description: The date-time of when the object was created
+          type: string
+          example: 8/9/2023 9:38:51 AM
+        updated-at:
+          description: The date-time of when the object was last updated
           type: string
           example: 8/9/2023 9:38:51 AM
         description:
@@ -127,23 +131,20 @@ components:
           example: Example description
         line-num:
           description: Line Number
+          type: number
+          example: 4
+        need-by-date:
+          description: date
           type: string
-          example: Paris, France
-        status:
-          description: status
-          type: string
+          example: 8/9/2023
+        order-line-id:
+          description: ID number of the order line
+          type: number
+          example: 636357
         quantity:
           description: quantity
           type: number
           example: 2
-        receipt-required:
-          description: reveipt required yes/no
-          type: string
-          example: True
-        updated-at:
-          description: updated at date
-          type: string
-          example: 10/10/2023
     ListOfItems:
       title: List of objects
       type: array

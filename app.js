@@ -108,9 +108,16 @@ async function getPOItems(po_num, bearer_token) {
             }
         }) 
         console.log('Response Code: '+res.status);
-        let requisition_items = res.data[0]['requisition-header']['requisition-lines'];
-        let table = {requisition_items}
-       // console.log(table);
+        let requisitionItems = res.data[0]['requisition-header']['requisition-lines'];
+        let filteredItems = [];
+        requisitionItems.forEach(item => {
+          let newItem = Object.fromEntries(
+            Object.entries(item).slice(0,8)
+          );
+          filteredItems.push(newItem);
+        });
+        let table = JSON.stringify({filteredItems});
+        console.log(table);
         return table
     } catch(error) {
         console.error('Error: ', error);
