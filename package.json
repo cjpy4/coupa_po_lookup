@@ -4,13 +4,16 @@
   "description": "An API that returns PO line items for a given PO #",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node app.js"
   },
   "author": "QREW Technologies",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/secret-manager": "^5.0.1",
     "axios": "^1.5.1",
     "express": "^4.18.2",
-    "run": "^1.4.0"
+    "run": "^1.4.0",
+    "serve-static": "^1.15.0"
   }
 }

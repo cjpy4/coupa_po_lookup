@@ -1,9 +1,18 @@
 var express = require("express");
 const axios = require("axios").default;
+const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 
+const client = new SecretManagerServiceClient();
 var app = express();
-
+const path = require('path');
+const fs = require('fs');
 let id = 664592;
+
+const client_id_var = "f8ba0b1ba25dbf462e86bd5242af1395"
+//const client_secret = 
+
+// const client_id = "f8ba0b1ba25dbf462e86bd5242af1395"
+const client_secret_var = "7d89686d38682093023a6dc267195dd02e1fba7a611f392727fb9f81b0cbfa6a"
 
 let testObj = {
   "orders": [
@@ -26,8 +35,28 @@ let testObj = {
   ]
 }
 
+app.use(express.static('public'))
+
 app.listen(8080, () => {
  console.log("Server running on port 8080");
+});
+
+app.get("/", async (req, res, next ) => {
+  // const options = {
+    // root: path.join(__dirname, 'public')
+  // };
+  let file = fs.readFile(path.join(__dirname,'public','apispec.yml'), 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    const modifiedSpec = data.replace(/SERVER_URL/g, req.protocol+'://'+req.get('host'));
+    
+    res.set('Content-Type', 'text/plain;charset=UTF-8');
+    
+    res.send(modifiedSpec);
+  });
+  // res.sendFile("apispec.yml", options);
 });
 
 app.get("/requisition_items", async (req, res, next) => {
@@ -45,12 +74,17 @@ app.get("/orders", async (req, res, next) => {
     res.send(testObj);
 });
 
-
+let secret = 'projects/aldridge-coupa-appsheet/secrets/client_secret';
+let request = {
+  name: secret,
+};
 async function getToken() {
 try {
+    //const access_response = await client.getSecret(request);
+    //console.log(access_response);
     const res = await axios.post('https://aldridge.coupahost.com/oauth2/token', {
-        client_id: `${client_id}`,
-        client_secret: `${client_secret}`,
+        client_id: `${client_id_var}`,
+        client_secret: `${client_secret_var}`,
         scope: 'core.purchase_order.read core.purchase_order.write core.user.read core.user.write',
         grant_type: 'client_credentials'
     }, {
