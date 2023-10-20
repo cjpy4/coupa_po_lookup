@@ -8,11 +8,11 @@ const path = require('path');
 const fs = require('fs');
 let id = 664592;
 
-const client_id_var = "f8ba0b1ba25dbf462e86bd5242af1395"
+const client_id_var = $client_id
 //const client_secret = 
 
 // const client_id = "f8ba0b1ba25dbf462e86bd5242af1395"
-const client_secret_var = "7d89686d38682093023a6dc267195dd02e1fba7a611f392727fb9f81b0cbfa6a"
+const client_secret_var = $client_secret
 
 let testObj = {
   "orders": [
